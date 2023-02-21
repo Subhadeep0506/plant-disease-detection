@@ -1,0 +1,5 @@
+Flask==2.2.3
+gevent==22.10.2
+keras==2.9.0
+opencv-python
+tensorflow==2.9.2

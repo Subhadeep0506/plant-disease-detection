@@ -1,6 +1,20 @@
 # Plant Disease Detection - Final Year Project
 
-## 01. Python environment
+## Final Webapp Preview
+
+- Initial landing page
+  ![Landing page](https://github.com/Subhadeep0506/plant-disease-detection/blob/main/screenshots/0001.png?raw=true)
+
+- Prediction
+  ![Prediction](https://github.com/Subhadeep0506/plant-disease-detection/blob/main/screenshots/0002.png?raw=true)
+
+- Loading image (Notice the file name)
+  ![Loading image](https://github.com/Subhadeep0506/plant-disease-detection/blob/main/screenshots/0003.png?raw=true)
+
+- Predicting the right label
+  ![Predicting the right label](https://github.com/Subhadeep0506/plant-disease-detection/blob/main/screenshots/0004.png?raw=true)
+
+## 02. Python environment
 
 Create a virtual environment with Python 3.8
 

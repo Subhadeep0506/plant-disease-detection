@@ -11,7 +11,8 @@ from flask import Flask, request, render_template
 app = Flask(__name__)
 
 # Model saved with Keras model.save()
-MODEL_PATH = 'models/my_best_model.h5'
+# MODEL_PATH = 'models/latest_model.h5'
+MODEL_PATH = 'models/model_dnet121.h5'
 
 # Loading the diseases json into a python dictionary
 diseases_dict = None
@@ -27,9 +28,9 @@ print('Page is being served at http://127.0.0.1:5000/')
 
 def model_predict(img_path, model):
     img = cv2.imread(img_path)
-    new_arr = cv2.resize(img, (100, 100))
+    new_arr = cv2.resize(img, (128, 128))
     new_arr = np.array(new_arr/255)
-    new_arr = new_arr.reshape(-1, 100, 100, 3)
+    new_arr = new_arr.reshape(-1, 128, 128, 3)
 
     preds = model.predict(new_arr)
     return preds

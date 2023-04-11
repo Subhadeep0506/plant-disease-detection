@@ -14,7 +14,7 @@
 - Predicting the right label
   ![Predicting the right label](https://github.com/Subhadeep0506/plant-disease-detection/blob/main/screenshots/0004.png?raw=true)
 
-## 02. Python environment
+## Setting up Python environment
 
 Create a virtual environment with Python 3.8
 

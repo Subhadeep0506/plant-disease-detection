@@ -7,26 +7,39 @@ from keras.models import load_model
 from flask import Flask, request, render_template
 
 
-# Define a flask app
 app = Flask(__name__)
 
-# Model saved with Keras model.save()
 # MODEL_PATH = 'models/latest_model.h5'
 MODEL_PATH = 'models/model_dnet121.h5'
 
-# Loading the diseases json into a python dictionary
 diseases_dict = None
 with open("./diseases.json") as json_data:
     diseases_dict = json.load(json_data)
 
-# Load your trained model
 model = load_model(MODEL_PATH)
 
-# model._make_predict_function()
 print('Page is being served at http://127.0.0.1:5000/')
 
 
 def model_predict(img_path, model):
+    """
+        Takes in image path and the model being used and returns the predicted class-wise probabilities.
+
+        `image_path` and `model` cannot be None.
+
+        Parameters
+        ----------
+        image_path: str
+            Actual path of uploaded image file that will be used for predicting.
+        
+        model: Any
+            The Tensorflow model that will be used to predict the input image disease class.
+
+        Returns
+        -------
+        pred: Any
+            Returns the class-wise probabilities of the input image, as predicted by the given model.
+    """
     img = cv2.imread(img_path)
     new_arr = cv2.resize(img, (128, 128))
     new_arr = np.array(new_arr/255)
@@ -44,19 +57,15 @@ def index():
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-        # Get the file from post request
         f = request.files['file']
 
-        # Save the file to ./uploads
         basepath = os.path.dirname(__file__)
         file_path = os.path.join(
             basepath, 'uploads', f.filename)
         f.save(file_path)
 
-        # Make prediction
         preds = model_predict(file_path, model)
 
-        # Process your result for human
         pred_class = preds.argmax()
         
         CATEGORIES = ['Pepper__bell___Bacterial_spot', 'Pepper__bell___healthy',

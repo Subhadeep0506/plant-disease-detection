@@ -4,7 +4,7 @@ import os
 import cv2
 
 from keras.models import load_model
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 
 
 app = Flask(__name__)
@@ -67,7 +67,7 @@ def upload():
         preds = model_predict(file_path, model)
 
         pred_class = preds.argmax()
-        
+        probability = preds[0][pred_class]
         CATEGORIES = [
             'Pepper__bell___Bacterial_spot', 'Pepper__bell___healthy',
             'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy',
@@ -76,7 +76,10 @@ def upload():
             'Tomato_Spider_mites_Two_spotted_spider_mite', 'Tomato__Target_Spot',
             'Tomato__YellowLeaf__Curl_Virus', 'Tomato_mosaic_virus',
             'Tomato_healthy']
-        return diseases_dict[CATEGORIES[pred_class]]
+        return jsonify({
+            "predict": diseases_dict[CATEGORIES[pred_class]],
+            "probability": str(round(probability, 4))
+        })
 
     return None
 

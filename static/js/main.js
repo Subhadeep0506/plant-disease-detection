@@ -1,49 +1,54 @@
 $(document).ready(function () {
-  $('.image-section').hide();
-  $('.loader').hide();
-  $('#result').hide();
+  $(".image-section").hide();
+  $(".loader").hide();
+  $("#result").hide();
+  $("#probability").hide();
 
   function readURL(input) {
-      if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-              $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-              $('#imagePreview').hide();
-              $('#imagePreview').fadeIn(650);
-          }
-          reader.readAsDataURL(input.files[0]);
-      }
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#imagePreview").css(
+          "background-image",
+          "url(" + e.target.result + ")"
+        );
+        $("#imagePreview").hide();
+        $("#imagePreview").fadeIn(650);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
   }
   $("#imageUpload").change(function () {
-      $('.image-section').show();
-      $('#btn-predict').show();
-      $('#result').text('');
-      $('#result').hide();
-      readURL(this);
+    $(".image-section").show();
+    $("#btn-predict").show();
+    $("#result").text("");
+    $("#probability").text("");
+    $("#result").hide();
+    $("#probability").hide();
+    readURL(this);
   });
 
-  $('#btn-predict').click(function () {
-      var form_data = new FormData($('#upload-file')[0]);
+  $("#btn-predict").click(function () {
+    var form_data = new FormData($("#upload-file")[0]);
 
-      // Show loading animation
-      $(this).hide();
-      $('.loader').show();
+    $(this).hide();
+    $(".loader").show();
 
-      $.ajax({
-          type: 'POST',
-          url: '/predict',
-          data: form_data,
-          contentType: false,
-          cache: false,
-          processData: false,
-          async: true,
-          success: function (data) {
-              // Get and display the result
-              $('.loader').hide();
-              $('#result').fadeIn(600);
-              $('#result').text(' Result:  ' + data);
-              console.log('Success!');
-          },
-      });
+    $.ajax({
+      type: "POST",
+      url: "/predict",
+      data: form_data,
+      contentType: false,
+      cache: false,
+      processData: false,
+      async: true,
+      success: function (data) {
+        $(".loader").hide();
+        $("#result").fadeIn(600);
+        $("#probability").fadeIn(600);
+        $("#result").text(" Result:  " + data.predict);
+        $("#probability").text(" Probability:  " + data.probability);
+      },
+    });
   });
 });

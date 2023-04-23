@@ -13,7 +13,7 @@ $(document).ready(function () {
           "url(" + e.target.result + ")"
         );
         $("#imagePreview").hide();
-        $("#imagePreview").fadeIn(650);
+        $("#imagePreview").fadeIn(400);
       };
       reader.readAsDataURL(input.files[0]);
     }
@@ -44,8 +44,8 @@ $(document).ready(function () {
       async: true,
       success: function (data) {
         $(".loader").hide();
-        $("#result").fadeIn(600);
-        $("#probability").fadeIn(600);
+        $("#result").fadeIn(300);
+        $("#probability").fadeIn(300);
         $("#result").text(" Result:  " + data.predict);
         $("#probability").text(" Probability:  " + data.probability);
       },

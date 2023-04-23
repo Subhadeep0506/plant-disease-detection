@@ -76,6 +76,7 @@ def upload():
             'Tomato_Spider_mites_Two_spotted_spider_mite', 'Tomato__Target_Spot',
             'Tomato__YellowLeaf__Curl_Virus', 'Tomato_mosaic_virus',
             'Tomato_healthy']
+        
         return jsonify({
             "predict": diseases_dict[CATEGORIES[pred_class]],
             "probability": str(round(probability, 4))

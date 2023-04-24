@@ -1,6 +1,7 @@
 $(document).ready(function () {
   $(".image-section").hide();
   $(".loader").hide();
+  $("#results").hide();
   $("#result").hide();
   $("#probability").hide();
 
@@ -23,6 +24,7 @@ $(document).ready(function () {
     $("#btn-predict").show();
     $("#result").text("");
     $("#probability").text("");
+    $("#results").hide();
     $("#result").hide();
     $("#probability").hide();
     readURL(this);
@@ -44,6 +46,7 @@ $(document).ready(function () {
       async: true,
       success: function (data) {
         $(".loader").hide();
+        $("#results").fadeIn(300);
         $("#result").fadeIn(300);
         $("#probability").fadeIn(300);
         $("#result").text(" Result:  " + data.predict);

@@ -10,7 +10,9 @@
 
 <div class="d-flex justify-content-center align-items-center flex-column">
   <form id="upload-file" method="post" enctype="multipart/form-data">
-    <label for="imageUpload" class="btn btn-dark"> Choose... </label>
+    <label for="imageUpload" class="btn btn-dark choose-image">
+      Choose...
+    </label>
     <input
       type="file"
       name="file"
@@ -19,7 +21,7 @@
     />
   </form>
   <div class="image-section" style="display: none">
-    <div class="img-preview p-2">
+    <div class="img-preview p-1">
       <div id="imagePreview"></div>
     </div>
     <div class="d-flex justify-content-center">
@@ -35,12 +37,17 @@
 
   <div class="loader" style="display: none"></div>
 
-  <h3 id="result">
-    <span> </span>
-  </h3>
-  <h3 id="probability">
-    <span> </span>
-  </h3>
+  <div
+    class="d-flex justify-content-center align-items-center flex-column"
+    id="results"
+  >
+    <h3 id="result">
+      <span> </span>
+    </h3>
+    <h3 id="probability">
+      <span> </span>
+    </h3>
+  </div>
 </div>
 
 {% endblock %}
